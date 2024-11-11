@@ -1,6 +1,28 @@
 const express = require('express');
 const app = express(); // Método construtor //
 
+const sequelize = require('./config/db');''
+const Usuario = require('./models/Usuario');
+const Ponto = require('./models/Ponto');
+
+sequelize.sync({ alter: true })
+    .then(() => {
+        console.log("Sucesso!");
+    })
+    .catch(error => {
+        console.log(`Erro ao sincronizar as tabelas - ${error}`);
+    });
+
+sequelize.authenticate()
+    .then(() => {
+        console.log("Conectado ao bd");
+    })
+    .catch(error => {
+        console.log("Erro ao conectar no bd");
+    });
+
+Ponto.create({ tipo: 'E', dataHora: 'sss'})
+
 // app.METODO('rota/caminho', (req, res) => {})
 
 app.get('/users', (req, res) => {
